@@ -82,5 +82,20 @@ public class WordSearch{
      *and the board is NOT modified.
      */
     public boolean addWordVertical(String word,int row, int col){
-    }
+      clear();
+      int length = word.length();
+      int r = row+length;
+      int index = 0;
+      if (r>data.length){
+        return false;}
+      for(int i = row; i < r; i++) {
+        if (data[i][col]=='_' || data[i][col]==word.charAt(index)){
+          data[i][col]=word.charAt(index);
+        }
+        else{return false;
+        }
+        index++;
+      }
+      return true;}
+
 }
