@@ -10,6 +10,7 @@ public class WordSearch{
     public WordSearch(int rows,int cols){
       char[][] s = new char[rows][cols];
       data=s;
+      clear();
     }
 
     /**Set all values in the WordSearch to underscores'_'*/
