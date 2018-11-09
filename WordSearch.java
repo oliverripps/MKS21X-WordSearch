@@ -1,17 +1,28 @@
+import java.util.*; //random, scanner, arraylist
+import java.io.*; //file, filenotfoundexception
 public class WordSearch{
     private char[][]data;
 
+        //the random seed used to produce this WordSearch
+        private int seed;
 
-    /**Initialize the grid to the size specified
-     *and fill all of the positions with '_'
-     *@param row is the starting height of the WordSearch
-     *@param col is the starting width of the WordSearch
-     */
-    public WordSearch(int rows,int cols){
-      char[][] s = new char[rows][cols];
-      data=s;
-      clear();
+        //a random Object to unify your random calls
+        private Random randgen;
+
+        //all words from a text file get added to wordsToAdd, indicating that they have not yet been added
+        private ArrayList<String>wordsToAdd;
+
+        //all words that were successfully added get moved into wordsAdded.
+        private ArrayList<String>wordsAdded;
+
+
+    public WordSearch( int rows, int cols, String fileName){
+      //choose a randSeed using the clock random
     }
+    public WordSearch( int rows, int cols, String fileName, int randSeed){
+      //  Both will read in the word text file, then run addAllWords(). Do not fill in random letters after.
+}
+
 
     /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
@@ -21,6 +32,15 @@ public class WordSearch{
         }
       }
     }
+    private boolean addWord( int r, int c, String word, int rowIncrement, int colIncrement)
+    //NEED TO ALTER METHODS TO CHECK IF THE WHOLE STRING FITS BEFORE STARTING TO ADD
+    /*-when colIncrement and rowIncrement are both 0, return false. 
+    -when you successfully add a word, move the word from wordsToAdd to wordsAdded, then return true.
+    -return false otherwise.*/
+
+
+
+
 
     /**Each row is a new line, there is a space between each letter
      *@return a String with each character separated by spaces, and rows
