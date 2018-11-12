@@ -11,29 +11,56 @@ public class WordSearch{
     //all words that were successfully added get moved into wordsAdded.
     private ArrayList<String>wordsAdded;
 
-    public WordSearch( int rows, int cols, String fileName) throws FileNotFoundException{
-      Random r = new Random();
-      int rn= r.nextInt() % 1000;
+    public WordSearch( int rows, int cols, String fileName) /* throws FileNotFoundException*/{
+      if ((rows<=0) || (cols<=0)){
+      throw new IllegalArgumentException("indeces less than 1")
+    }
+      else{
+      randgen = new Random();
+      int rn= randgen.nextInt() % 1000;
       Random rng = new Random(rn);
       seed= rng.nextInt();
-      char[][] n = new char[rows][cols];
-      data=n;
+      data = new char[rows][cols];
+      wordsToAdd = new ArrayList<String>();
       clear();
-      ArrayList<String> wordsToAdd = new ArrayList<String>();
       try{
       File f = new File(fileName);
       Scanner p = new Scanner(f);
-      while( p.hasNext()){
-        String line = p.nextLine();
-        wordsToAdd.add(line);
+      while (p.hasNext()) {
+            String newWord = p.nextLine().toUpperCase();
+            wordsToAdd.add(newWord);
+            words.add(newWord);
 }
     }catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
     }
-  }
-    public WordSearch( int rows, int cols, String fileName, int randSeed){
-      //  Both will read in the word text file, then run addAllWords(). Do not fill in random letters after.
-}
+  }}
+    public WordSearch( int rows, int cols, String fileName, int randSeed) /* throws FileNotFoundException*/{
+      if ((rows <= 0) || (cols <= 0)) {
+          throw new IllegalArgumentException("error, negative index(es)");}
+      else{
+        data = new char[rows][cols];
+        wordsToAdd = new ArrayList<String>();
+        wordsAdded = new ArrayList<String>();
+        seed = randSeed;
+        randgen = new Random(randSeed);
+        clear();
+        try {
+          File f = new File(filename);
+          Scanner p = new Scanner(f);
+
+          while (p.hasNext()) {
+            String newWord = p.nextLine().toUpperCase();
+            wordsToAdd.add(newWord);
+            words.add(newWord);
+          }
+
+          this.addAllWords();
+        } catch (FileNotFoundException e) {
+          System.out.println("File not found: " + filename);
+        }
+      }} 
+
 
 
     /**Set all values in the WordSearch to underscores'_'*/
