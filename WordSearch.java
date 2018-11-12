@@ -13,7 +13,7 @@ public class WordSearch{
 
     public WordSearch( int rows, int cols, String fileName) /* throws FileNotFoundException*/{
       if ((rows<=0) || (cols<=0)){
-      throw new IllegalArgumentException("indeces less than 1")
+      throw new IllegalArgumentException("indeces less than 1");
     }
       else{
       randgen = new Random();
@@ -29,7 +29,6 @@ public class WordSearch{
       while (p.hasNext()) {
             String newWord = p.nextLine().toUpperCase();
             wordsToAdd.add(newWord);
-            words.add(newWord);
 }
     }catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
@@ -46,20 +45,19 @@ public class WordSearch{
         randgen = new Random(randSeed);
         clear();
         try {
-          File f = new File(filename);
+          File f = new File(fileName);
           Scanner p = new Scanner(f);
 
           while (p.hasNext()) {
             String newWord = p.nextLine().toUpperCase();
             wordsToAdd.add(newWord);
-            words.add(newWord);
           }
 
           this.addAllWords();
         } catch (FileNotFoundException e) {
-          System.out.println("File not found: " + filename);
+          System.out.println("File not found: " + fileName);
         }
-      }} 
+      }}
 
 
 
@@ -104,11 +102,11 @@ public class WordSearch{
             s+=" ";
           }
           else{
-            s+="| \n";
+            s+="|";
         }
         }
       if(i<data.length-1){
-        s+="|";
+        s+="\n|";
       }
       }
       return s;
