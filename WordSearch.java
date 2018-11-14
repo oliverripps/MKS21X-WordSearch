@@ -59,8 +59,6 @@ public class WordSearch{
         }
       }}
 
-
-
     /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
       for(int i=0;i<data.length;i++){
@@ -92,6 +90,14 @@ public class WordSearch{
 			}
     return true;
 		}
+    private void addAllWords(){
+      /*Attempt to add all of the words from the wordsToAdd list using the following algorithm:
+Choose a random word, and a random direction (rowIncrement/colIncrement)
+Try to add that word to different starting positions* until:
+you successfully add the word
+you run out of positional tries
+Repeat this process until you added all of the words, or you tried to add unsuccessfully too many times in a row.*/
+    }
 
     public String toString(){
       String s = "|";
