@@ -1,5 +1,6 @@
 import java.util.*; //random, scanner, arraylist
 import java.io.*; //file, filenotfoundexception
+import java.lang.Math;
 public class WordSearch{
     private char[][]data;
     //the random seed used to produce this WordSearch
@@ -11,30 +12,19 @@ public class WordSearch{
     //all words that were successfully added get moved into wordsAdded.
     private ArrayList<String>wordsAdded;
 
-    public WordSearch( int rows, int cols, String fileName) /* throws FileNotFoundException*/{
+    public WordSearch( int rows, int cols, String fileName, int randSeed, boolean key) /* throws FileNotFoundException*/{
       if ((rows<=0) || (cols<=0)){
-      throw new IllegalArgumentException("indeces less than 1");
+        throw new IllegalArgumentException("indeces less than 1");
     }
       else{
-      randgen = new Random();
-      int rn= randgen.nextInt() % 1000;
-      Random rng = new Random(rn);
-      seed= rng.nextInt();
+      randgen = new Random(seed);}
       data = new char[rows][cols];
-      wordsToAdd = new ArrayList<String>();
+      wordsToAdd = wordlist(fileName);
       clear();
-      try{
-      File f = new File(fileName);
-      Scanner p = new Scanner(f);
-      while (p.hasNext()) {
-            String newWord = p.nextLine().toUpperCase();
-            wordsToAdd.add(newWord);
-}
-    }catch(FileNotFoundException e){
-      System.out.println("File not found: " + fileName);
-    }
+      wordsAdded = new ArrayList<String>();
+
   }}
-    public WordSearch( int rows, int cols, String fileName, int randSeed) /* throws FileNotFoundException*/{
+    /*public WordSearch( int rows, int cols, String fileName, int randSeed)  throws FileNotFoundException{
       if ((rows <= 0) || (cols <= 0)) {
           throw new IllegalArgumentException("error, negative index(es)");}
       else{
@@ -57,7 +47,7 @@ public class WordSearch{
         } catch (FileNotFoundException e) {
           System.out.println("File not found: " + fileName);
         }
-      }}
+      }}*/
 
     /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
@@ -98,6 +88,23 @@ you successfully add the word
 you run out of positional tries
 Repeat this process until you added all of the words, or you tried to add unsuccessfully too many times in a row.*/
     }
+    private int makeseed(){
+      int i = (int)(Math.random()*100000);
+      return i;
+    }
+    private ArrayList<String> wordlist(String fileName){
+      ArrayList<String> i= new ArrayList<String>();
+      try{
+      File f = new File(fileName);
+      Scanner p = new Scanner(f);
+      while (p.hasNext()) {
+            String n = p.nextLine().toUpperCase();
+            i.add(n);}}
+      catch(FileNotFoundException e){
+      System.out.println("File not found: " + fileName);
+    }
+  }
+
 
     public String toString(){
       String s = "|";
