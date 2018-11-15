@@ -12,18 +12,40 @@ public class WordSearch{
     //all words that were successfully added get moved into wordsAdded.
     private ArrayList<String>wordsAdded;
 
-    public WordSearch( int rows, int cols, String fileName, int randSeed, boolean key) /* throws FileNotFoundException*/{
+    public WordSearch( int rows, int cols, String fileName, int randSeed, boolean key) throws FileNotFoundException{
       if ((rows<=0) || (cols<=0)){
         throw new IllegalArgumentException("indeces less than 1");
     }
       else{
-      randgen = new Random(seed);}
+      seed=randSeed;
+      randgen = new Random(seed);
       data = new char[rows][cols];
       wordsToAdd = wordlist(fileName);
       clear();
       wordsAdded = new ArrayList<String>();
+      addAllWords();
+      if(key==false){
+        fillpuzzle();
+      }
+      toString();
 
-  }}
+    }}
+
+      public static void main(String args[]){
+        if(args.length<3 || args.length>5){
+          System.out.println("PUT IN DIRECTIONS");
+        }
+        else if (args.length==3){
+          WordSearch w = new WordSearch(args[0],args[1],args[2],makeseed(),false);}//DO PARSE INT
+        else if (args.length==4){
+            WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],false);}
+        else if(args[4].equals("key")){
+          WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],true);}
+        else {
+          WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],false);
+        }
+        System.out.println(w);
+      }
     /*public WordSearch( int rows, int cols, String fileName, int randSeed)  throws FileNotFoundException{
       if ((rows <= 0) || (cols <= 0)) {
           throw new IllegalArgumentException("error, negative index(es)");}
@@ -88,7 +110,8 @@ you successfully add the word
 you run out of positional tries
 Repeat this process until you added all of the words, or you tried to add unsuccessfully too many times in a row.*/
     }
-    private int makeseed(){
+    private void fillpuzzle(){}
+    private static int makeseed(){
       int i = (int)(Math.random()*100000);
       return i;
     }
@@ -122,6 +145,9 @@ Repeat this process until you added all of the words, or you tried to add unsucc
         s+="\n|";
       }
       }
+      s+="\n";
+      s+=wordsAdded.toString();
+      s+="("+seed+")";
       return s;
     }
 }
