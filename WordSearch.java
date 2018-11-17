@@ -42,10 +42,10 @@ public class WordSearch{
 
       public static void main(String args[]) throws FileNotFoundException{
         if(args.length<3 || args.length>5 || Integer.parseInt(args[0])<0 || Integer.parseInt(args[1])<0){
-          System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than 10000) key(optional)");
+          System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than or equal to 10000) key(optional)");
         }
         else if(args.length>3 && args.length<6 && Integer.parseInt(args[3])>10000){
-          System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than 10000) key(optional)");
+          System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than or equal to 10000) key(optional)");
         }
         else if(wordlist(args[2]).size()!=0){
         if (args.length==3){
@@ -109,9 +109,10 @@ public class WordSearch{
             w+=200;
             wordsAdded.add(wordsToAdd.get(l));
             wordsToAdd.remove(l);
+            l--;
           }}}}
     private static int makeseed(){
-      int i = (int)(Math.random()*100000);
+      int i = (int)(Math.random()*10001);
       return i;
     }
     private static ArrayList<String> wordlist(String fileName){
@@ -123,7 +124,7 @@ public class WordSearch{
             String n = p.nextLine().toUpperCase();
             i.add(n);}}
       catch(FileNotFoundException e){
-      System.out.println("File not found: " + fileName + "\nFormat must be.... \njava WordSearch rows(int value) columns(int value) file(that exists!!) name seed(optional) key(optional)");
+      System.out.println("File not found: " + fileName + "\nFormat must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than or equal to 10000) key(optional)");
     }
     return i;
   }
