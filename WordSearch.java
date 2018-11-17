@@ -1,20 +1,17 @@
-import java.util.*; //random, scanner, arraylist
-import java.io.*; //file, filenotfoundexception
+import java.util.*;
+import java.io.*;
 import java.lang.Math;
 public class WordSearch{
+
     private char[][]data;
-    //the random seed used to produce this WordSearch
     private int seed;
-    //a random Object to unify your random calls
     private Random randgen;
-    //all words from a text file get added to wordsToAdd, indicating that they have not yet been added
     private ArrayList<String>wordsToAdd;
-    //all words that were successfully added get moved into wordsAdded.
     private ArrayList<String>wordsAdded;
 
     public WordSearch( int rows, int cols, String fileName, int randSeed, boolean key) throws FileNotFoundException{
       if ((rows<=0) || (cols<=0)){
-        throw new IllegalArgumentException("indeces less than 1");
+        throw new IllegalArgumentException("Indeces less than 1");
     }
       else{
       seed=randSeed;
@@ -24,54 +21,42 @@ public class WordSearch{
       clear();
       wordsAdded = new ArrayList<String>();
       addAllWords();
-      if(key==false){
-        fillpuzzle();
-      }
+      fillpuzzle(key);
       toString();
 
     }}
+      private void fillpuzzle(boolean b){
+        if (!b){
+          for(int i=0;i<data.length;i++){
+            for(int c =0;c<data[i].length;c++){
+              if(data[i][c]=='_'){
+                data[i][c]=' ';
+              }
+            }}}
+        else{
+          Random r = new Random();
+          for(int i=0;i<data.length;i++){
+            for(int c =0;c<data[i].length;c++){
+              if(data[i][c]=='_'){
+                char d = (char)(r.nextInt(26)+'a');
+                data[i][c]=d;}
+              }}}}
 
       public static void main(String args[]){
         if(args.length<3 || args.length>5){
           System.out.println("PUT IN DIRECTIONS");
         }
         else if (args.length==3){
-          WordSearch w = new WordSearch(args[0],args[1],args[2],makeseed(),false);}//DO PARSE INT
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],makeseed(),false);}//DO PARSE INT
         else if (args.length==4){
-            WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],false);}
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);}
         else if(args[4].equals("key")){
-          WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],true);}
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),true);}
         else {
-          WordSearch w = new WordSearch(args[0],args[1],args[2],args[3],false);
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);
         }
         System.out.println(w);
       }
-    /*public WordSearch( int rows, int cols, String fileName, int randSeed)  throws FileNotFoundException{
-      if ((rows <= 0) || (cols <= 0)) {
-          throw new IllegalArgumentException("error, negative index(es)");}
-      else{
-        data = new char[rows][cols];
-        wordsToAdd = new ArrayList<String>();
-        wordsAdded = new ArrayList<String>();
-        seed = randSeed;
-        randgen = new Random(randSeed);
-        clear();
-        try {
-          File f = new File(fileName);
-          Scanner p = new Scanner(f);
-
-          while (p.hasNext()) {
-            String newWord = p.nextLine().toUpperCase();
-            wordsToAdd.add(newWord);
-          }
-
-          this.addAllWords();
-        } catch (FileNotFoundException e) {
-          System.out.println("File not found: " + fileName);
-        }
-      }}*/
-
-    /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
       for(int i=0;i<data.length;i++){
         for(int c =0;c<data[i].length;c++){
@@ -82,26 +67,20 @@ public class WordSearch{
 
     private boolean addWord(String word, int row, int col, int rowIncrement, int columnIncrement){
 		word = word.toUpperCase();
-    if(row + rowIncrement * word.length() > data.length || col + columnIncrement * word.length() > data[0].length){
-			return false;
-		}
+    if(col + columnIncrement * word.length() > data[0].length || row + rowIncrement * word.length() > data.length){
+			return false;}
     for(int i = 0; i < word.length(); i++){
 			char c = data[row][col];
 			if(c != '_' && c != word.charAt(i)){
-				return false;
-			}
-
-			row += rowIncrement;
+				return false;}
 			col += columnIncrement;
-		}
+      row += rowIncrement;}
     for(int i = 0; i < word.length(); i++){
 			char c = data[row][col];
 			data[row][col]=word.charAt(i);
-      row+= rowIncrement;
       col+= columnIncrement;
-			}
-    return true;
-		}
+      row+= rowIncrement;}
+    return true;}
     private void addAllWords(){
       /*Attempt to add all of the words from the wordsToAdd list using the following algorithm:
 Choose a random word, and a random direction (rowIncrement/colIncrement)
