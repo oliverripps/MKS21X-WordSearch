@@ -147,8 +147,14 @@ public class WordSearch{
       }
       }
       s+="\n";
-      s+= wordsAdded.toString();
-      s+="("+seed+")";
+      s+="Words:";
+      for(int i=0;i<wordsAdded.size();i++){
+        s+=" " + wordsAdded.get(i);
+        if(i<wordsAdded.size()-1){
+        s+=",";
+      }
+      }
+      s+=" (seed: "+seed+")";
       return s;
     }
 }
