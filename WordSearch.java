@@ -67,7 +67,7 @@ public class WordSearch{
 
     private boolean addWord(String word, int row, int col, int rowIncrement, int columnIncrement){
 		word = word.toUpperCase();
-    if(col + columnIncrement * word.length() > data[0].length || row + rowIncrement * word.length() > data.length){
+    if(col + (columnIncrement * word.length()) > data[0].length-1 || col + (columnIncrement * word.length()) < 0 || row + (rowIncrement * word.length()) > data.length-1 || row + (rowIncrement * word.length()) < 0){
 			return false;}
     for(int i = 0; i < word.length(); i++){
 			char c = data[row][col];
@@ -81,17 +81,20 @@ public class WordSearch{
       col+= columnIncrement;
       row+= rowIncrement;}
     return true;}
+
     private void addAllWords(){
-      int r1 = data.length;
-      int c1 = data[0].length;
+      int r1 = data.length-1;
+      int c1 = data[0].length-1;
       for(int l=0; l<(wordsToAdd.size());l++){
         for(int w=0; w<200;w++){
           int i =randgen.nextInt(3)-1;
           int p =randgen.nextInt(3)-1;
           int r =randgen.nextInt(r1);
-          int c = randgen.nextInt(c1);
+          int c =randgen.nextInt(c1);
           if(addWord(wordsToAdd.get(l),r,c,p,i)){
             w+=200;
+            wordsAdded.add(wordsToAdd.get(l));
+            wordsToAdd.remove(l);
           }}}}
     private static int makeseed(){
       int i = (int)(Math.random()*100000);
@@ -129,7 +132,7 @@ public class WordSearch{
       }
       }
       s+="\n";
-      s+=wordsAdded.toString();
+      s+= wordsAdded.toString();
       s+="("+seed+")";
       return s;
     }

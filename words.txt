@@ -1,8 +1,6 @@
-Java
-Has
-Multitudes
-Of
-Features
-Which
-Allows
-Learning
+RED
+Blue
+Green
+Yellow
+Orange
+Magenta
