@@ -47,15 +47,17 @@ public class WordSearch{
           System.out.println("PUT IN DIRECTIONS");
         }
         else if (args.length==3){
-          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],makeseed(),false);}//DO PARSE INT
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],makeseed(),false);
+          System.out.println(w);}
         else if (args.length==4){
-          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);}
-        else if(args[4].equals("key")){
-          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),true);}
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);
+          System.out.println(w);}
+        else if (args[4].equals("key")){
+          WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),true);
+          System.out.println(w);}
         else {
           WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);
-        }
-        System.out.println(w);
+          System.out.println(w);}
       }
     private void clear(){
       for(int i=0;i<data.length;i++){
@@ -82,6 +84,7 @@ public class WordSearch{
       row+= rowIncrement;}
     return true;}
     private void addAllWords(){
+
       /*Attempt to add all of the words from the wordsToAdd list using the following algorithm:
 Choose a random word, and a random direction (rowIncrement/colIncrement)
 Try to add that word to different starting positions* until:
