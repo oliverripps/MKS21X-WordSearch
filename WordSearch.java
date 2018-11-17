@@ -23,7 +23,6 @@ public class WordSearch{
       addAllWords();
       fillpuzzle(key);
       toString();
-
     }}
       private void fillpuzzle(boolean b){
         if (!b){
@@ -34,15 +33,14 @@ public class WordSearch{
               }
             }}}
         else{
-          Random r = new Random();
           for(int i=0;i<data.length;i++){
             for(int c =0;c<data[i].length;c++){
               if(data[i][c]=='_'){
-                char d = (char)(r.nextInt(26)+'a');
+                char d = (char)(randgen.nextInt(26)+'a');
                 data[i][c]=d;}
               }}}}
 
-      public static void main(String args[]){
+      public static void main(String args[]) throws FileNotFoundException{
         if(args.length<3 || args.length>5){
           System.out.println("PUT IN DIRECTIONS");
         }
@@ -84,15 +82,17 @@ public class WordSearch{
       row+= rowIncrement;}
     return true;}
     private void addAllWords(){
-
-      /*Attempt to add all of the words from the wordsToAdd list using the following algorithm:
-Choose a random word, and a random direction (rowIncrement/colIncrement)
-Try to add that word to different starting positions* until:
-you successfully add the word
-you run out of positional tries
-Repeat this process until you added all of the words, or you tried to add unsuccessfully too many times in a row.*/
-    }
-    private void fillpuzzle(){}
+      int r1 = data.length;
+      int c1 = data[0].length;
+      for(int l=0; l<(wordsToAdd.size());l++){
+        for(int w=0; w<200;w++){
+          int i =randgen.nextInt(3)-1;
+          int p =randgen.nextInt(3)-1;
+          int r =randgen.nextInt(r1);
+          int c = randgen.nextInt(c1);
+          if(addWord(wordsToAdd.get(l),r,c,p,i)){
+            w+=200;
+          }}}}
     private static int makeseed(){
       int i = (int)(Math.random()*100000);
       return i;
@@ -108,6 +108,7 @@ Repeat this process until you added all of the words, or you tried to add unsucc
       catch(FileNotFoundException e){
       System.out.println("File not found: " + fileName);
     }
+    return i;
   }
 
 
