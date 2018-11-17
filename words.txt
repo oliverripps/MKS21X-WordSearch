@@ -1,9 +1,8 @@
-Oliver
-Is
-Trying
-To
-Pass
-APCS
-And
-Its
-Hard
+Java
+Has
+Multitudes
+Of
+Features
+Which
+Allows
+Learning
