@@ -95,7 +95,9 @@ public class WordSearch{
     private void addAllWords(){
       int r1 = data.length;
       int c1 = data[0].length;
-      for(int l=0; l<(wordsToAdd.size());l++){
+      int e =0;
+      while(wordsToAdd.size()>0 && e<200){
+        int l=randgen.nextInt(wordsToAdd.size());
         for(int w=0; w<200;w++){
           int i =randgen.nextInt(3)-1;
           int p =randgen.nextInt(3)-1;
@@ -110,7 +112,9 @@ public class WordSearch{
             wordsAdded.add(wordsToAdd.get(l));
             wordsToAdd.remove(l);
             l--;
-          }}}}
+          }}
+          e++;
+        }}
     private static int makeseed(){
       int i = (int)(Math.random()*10001);
       return i;
