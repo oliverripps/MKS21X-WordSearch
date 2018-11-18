@@ -41,7 +41,7 @@ public class WordSearch{
               }}}}
 
       public static void main(String args[]) throws FileNotFoundException{
-        if(args.length<3 || args.length>5 || Integer.parseInt(args[0])<0 || Integer.parseInt(args[1])<0){
+        try{if(args.length<3 || args.length>5 || Integer.parseInt(args[0])<0 || Integer.parseInt(args[1])<0){
           System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than or equal to 10000) key(optional)");
         }
         else if(args.length>3 && args.length<6 && Integer.parseInt(args[3])>10000){
@@ -61,6 +61,10 @@ public class WordSearch{
           WordSearch w = new WordSearch(Integer.parseInt(args[0]),Integer.parseInt(args[1]),args[2],Integer.parseInt(args[3]),false);
           System.out.println(w);}
       }}
+      catch(NumberFormatException e){
+          System.out.println("Format must be.... \njava WordSearch rows(POSITIVE int value) columns(POSITIVE int value) file(that exists!!) name seed(optional but less than or equal to 10000) key(optional)");
+        }
+      }
     private void clear(){
       for(int i=0;i<data.length;i++){
         for(int c =0;c<data[i].length;c++){
